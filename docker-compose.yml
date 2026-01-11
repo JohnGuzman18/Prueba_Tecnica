@@ -1,0 +1,25 @@
+version: '3.8'
+services:
+  #1. Base de datos
+  database:
+    image: mongo:latest
+    container_name: mongodb_container
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongo_data:/data/db
+
+  # 2. Tu Microservicio (Node/TypeScript)
+  api-crud:
+    build: ./microservice-crud # Busca el Dockerfile en esta carpeta
+    container_name: crud_container
+    ports:
+      - "3000:3000"
+    environment:
+      - PORT=3000
+      # Conecta al servicio "database" definido arriba
+      - MONGO_URI=mongodb://database:27017/technical_test
+    depends_on:
+      - database
+volumes:
+  mongo_data:
