@@ -21,5 +21,16 @@ services:
       - MONGO_URI=mongodb://database:27017/technical_test
     depends_on:
       - database
+  api-read:
+    build: ./microservice-read
+    container_name: read_container
+    ports:
+      - "3002:3002"
+    environment:
+      - PORT=3002
+      - MONGO_URI=mongodb://database:27017/technical_test
+    depends_on:
+      - database
+
 volumes:
   mongo_data:

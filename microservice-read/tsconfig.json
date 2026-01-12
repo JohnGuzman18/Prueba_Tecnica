@@ -1,16 +1,9 @@
-// Esto es una version mas especifica de typescript, la anterior es generica e estricta.
 {
   "compilerOptions": {
     "target": "es2016",
     "module": "commonjs",
-    "rootDir": "./src",
     "outDir": "./dist",
-    "esModuleInterop": true,
-    "forceConsistentCasingInFileNames": true,
     "strict": true,
-    "skipLibCheck": true
-  },
-  "include": [
-    "src/**/*"
-  ]
+    "esModuleInterop": true
+  }
 }
