@@ -5,7 +5,7 @@ import mongoose, { Schema, Document } from 'mongoose';
 export interface IPerson extends Document {
     firstName: string;
     lastName: string;
-    cellphone: number;
+    cellphone: string;
     email: string;
     address: string;
 }
