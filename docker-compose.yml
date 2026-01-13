@@ -19,6 +19,7 @@ services:
       - PORT=3000
       # Conecta al servicio "database" definido arriba
       - MONGO_URI=mongodb://database:27017/technical_test
+      - JWT_SECRET=mi_clave_super_secreta_y_dificil_123
     depends_on:
       - database
   api-read:
@@ -29,6 +30,7 @@ services:
     environment:
       - PORT=3002
       - MONGO_URI=mongodb://database:27017/technical_test
+      - JWT_SECRET=mi_clave_super_secreta_y_dificil_123
     depends_on:
       - database
 
