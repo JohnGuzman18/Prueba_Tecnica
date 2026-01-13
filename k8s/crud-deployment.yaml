@@ -1,0 +1,40 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: crud-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: crud-app
+  template:
+    metadata:
+      labels:
+        app: crud-app
+    spec:
+      containers:
+      - name: crud-container
+        image: my-crud-image:v1
+        imagePullPolicy: Never
+        ports:
+        - containerPort: 3000
+        env:
+        - name: PORT
+          value: "3000"
+        - name: MONGO_URI
+          value: "mongodb://database:27017/technical_test"
+        - name: JWT_SECRET
+          value: "mi_clave_super_secreta_k8s"
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: crud-service
+spec:
+  type: LoadBalancer # Esto nos dará una IP para entrar desde fuera
+  selector:
+    app: crud-app
+  ports:
+    - protocol: TCP
+      port: 3000      # Puerto externo
+      targetPort: 3000 # Puerto del contenedor

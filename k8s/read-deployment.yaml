@@ -1,0 +1,40 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: read-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: read-app
+  template:
+    metadata:
+      labels:
+        app: read-app
+    spec:
+      containers:
+      - name: read-container
+        image: my-read-image:v1
+        imagePullPolicy: Never
+        ports:
+        - containerPort: 3002
+        env:
+        - name: PORT
+          value: "3002"
+        - name: MONGO_URI
+          value: "mongodb://database:27017/technical_test"
+        - name: JWT_SECRET
+          value: "mi_clave_super_secreta_k8s"
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: read-service
+spec:
+  type: LoadBalancer
+  selector:
+    app: read-app
+  ports:
+    - protocol: TCP
+      port: 3002
+      targetPort: 3002
