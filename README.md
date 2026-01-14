@@ -10,6 +10,7 @@ Es crear 2 microservicios que uno de esto se encargue de la creacion y modificac
 - Docker
 - API Rest
 - Kubernetes
+- JWT
 
 ## Estructura del Proyecto
 
